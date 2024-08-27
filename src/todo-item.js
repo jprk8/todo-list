@@ -8,10 +8,6 @@ class Todo {
         this.notes = notes;
         this.dueDate = dueDate;
         this.priority = priority;
-    }
-    
-    setDueDate(dueDate) {
-        this.dueDate = dueDate;
+        this.complete = false;
     }
 }
-

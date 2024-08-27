@@ -14,6 +14,10 @@ class Project {
         this.todoArray.splice(index, 1);
     }
 
+    setTodoComplete(index) {
+        this.todoArray[index].complete = true;
+    }
+
     listTodo() {
         // sort by duedate and priority by default?
         // don't worry about it here
