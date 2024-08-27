@@ -1,4 +1,3 @@
-import { Todo } from './todo-item.js';
 export { Project };
 
 class Project {
@@ -11,8 +10,22 @@ class Project {
         this.todoArray.push(item);
     }
 
+    delTodo(index) {
+        this.todoArray.splice(index, 1);
+    }
+
     listTodo() {
+        // sort by duedate and priority by default?
+        // don't worry about it here
         console.log(`Project Name: ${this.title}`);
         console.table(this.todoArray);
+    }
+
+    sortByPriority() {
+        this.todoArray.sort((a, b) => a.priority - b.priority);
+    }
+
+    sortByDueDate() {
+        this.todoArray.sort((a, b) => a.dueDate - b.dueDate);
     }
 }

@@ -1,8 +1,9 @@
 export { Todo };
-import { format } from 'date-fns';
 
 class Todo {
-    constructor(title, notes, dueDate = new Date(), priority = 1) {
+    constructor(title, notes, dueDate, priority = 1) {
+        // omitting priroity will set to priority 1 (normal)
+        // reserve priority 0 for urgent todo
         this.title = title;
         this.notes = notes;
         this.dueDate = dueDate;
