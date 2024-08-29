@@ -1,7 +1,9 @@
 import './style.css';
 import { Todo } from './todo-item.js';
 import { Project } from './project.js';
-import { format } from 'date-fns'; // use later to format dates
+import { showTitle, showProjectList } from './display-controller.js';
+
+ // use later to format dates
 
 const projects = [];
 
@@ -22,10 +24,10 @@ const last = new Todo('future', 'due date is christmas (months start from 0)', n
 const fourth = new Todo('Fourth of July', 'Happy Fourth', new Date(2024, 6, 4));
 const christmas = new Todo('Christmas', 'Merry Christmas', new Date(2024, 11, 25));
 const newyear = new Todo('New Year', 'Happy New Year', new Date(2024, 0, 1));
-const valentines = new Todo('Valentines', 'Be My Valentine', new Date(2024, 1, 14));
+const thanks = new Todo('Thanksgiving', 'nom nom nom nom', new Date(2024, 10, 28));
 
-const myProject = new Project('My Project');
-const project2 = new Project('Another Project');
+const myProject = new Project('Test Project');
+const project2 = new Project('Holidays');
 myProject.addTodo(test);
 myProject.addTodo(test2);
 myProject.addTodo(test3);
@@ -35,8 +37,7 @@ myProject.addTodo(last);
 project2.addTodo(fourth);
 project2.addTodo(christmas);
 project2.addTodo(newyear);
-project2.addTodo(valentines);
-
+project2.addTodo(thanks);
 
 projects.push(myProject);
 projects.push(project2);
@@ -48,10 +49,8 @@ showProjects();
 //myProject.delTodo(2);
 //myProject.listTodo();
 
-project2.listTodo();
 project2.sortByDueDate();
 project2.listTodo();
-project2.setTodoComplete(2);
-project2.setTodoComplete(0);
-project2.setTodoComplete(1);
-project2.listTodo();
+
+showTitle(project2);
+showProjectList(projects);

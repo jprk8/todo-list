@@ -18,7 +18,7 @@ class Project {
         this.todoArray[index].complete = true;
     }
 
-    listTodo() {
+    listTodo() { // delete after implementing display controller
         // sort by duedate and priority by default?
         // don't worry about it here
         console.log(`Project Name: ${this.title}`);

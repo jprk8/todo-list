@@ -23,6 +23,7 @@ img, picture, video, canvas, svg {
 
 input, button, textarea, select {
     font: inherit;
+    padding: 0;
 }
 
 p, h1, h2, h3, h4, h5, h6 {
@@ -92,9 +93,58 @@ ul {
 
 .main-body {
     margin: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .main-title {
     font-size: 26px;
     font-weight: 800;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.todo-card {
+    width: 550px;
+    background-color: #eee;
+    border: 1px solid #bbb;
+    border-left: 6px solid orangered;
+    border-radius: 6px;
+    box-shadow: 1px 1px 3px darkgrey;
+    display: flex;
+    gap: 10px;
+}
+
+.todo-tab {
+    padding: 10px;
+    background-color: #ddd;
+}
+
+.todo-title {
+    font-size: 20px;
+}
+
+.todo-notes,
+.todo-dueDate {
+    color: #555;
+}
+
+.todo-dueDate {
+    font-weight: 700;
+}
+
+button.complete {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid #888;
+    cursor: pointer;
+}
+
+button.complete:hover {
+    background-color: orangered;
 }
