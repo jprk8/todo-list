@@ -106,6 +106,7 @@ ul {
 .main-container {
     display: flex;
     flex-direction: column;
+    gap: 20px;
 }
 
 .todo-card {
@@ -124,6 +125,10 @@ ul {
     background-color: #ddd;
 }
 
+.todo-main {
+    padding: 10px 5px;
+}
+
 .todo-title {
     font-size: 20px;
 }
@@ -133,18 +138,14 @@ ul {
     color: #555;
 }
 
-.todo-dueDate {
+.todo-date {
     font-weight: 700;
 }
 
 button.complete {
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
     border-radius: 50%;
     border: 1px solid #888;
     cursor: pointer;
-}
-
-button.complete:hover {
-    background-color: orangered;
 }

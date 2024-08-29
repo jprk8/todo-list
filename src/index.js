@@ -1,7 +1,7 @@
 import './style.css';
 import { Todo } from './todo-item.js';
 import { Project } from './project.js';
-import { showTitle, showProjectList } from './display-controller.js';
+import { showTitle, showProjectList, showProject } from './display-controller.js';
 
  // use later to format dates
 
@@ -52,5 +52,6 @@ showProjects();
 project2.sortByDueDate();
 project2.listTodo();
 
-showTitle(project2);
 showProjectList(projects);
+showTitle(project2);
+showProject(project2);
