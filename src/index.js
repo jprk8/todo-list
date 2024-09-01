@@ -1,9 +1,7 @@
 import './style.css';
 import { Todo } from './todo-item.js';
 import { Project } from './project.js';
-import { showTitle, showProjectList, showProject } from './display-controller.js';
-
- // use later to format dates
+import { showTitle, showProjectList, showProject, showHome } from './display-controller.js';
 
 const projects = [];
 
@@ -13,6 +11,20 @@ function showProjects() {
         console.log(`todo items: ${project.todoArray.length}`)
     }
 }
+
+// function for new task dialog
+const newTodoDialog = document.querySelector('.new-todo-dialog');
+const newTodoBtn = document.querySelector('.add-todo');
+
+newTodoBtn.addEventListener('click', () => {
+    newTodoDialog.showModal();
+});
+
+const closeBtn = document.querySelector('.close-btn');
+closeBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    newTodoDialog.close();
+});
 
 // testing testing testing testing testing testing testing testing testing testing testing 
 const test = new Todo('test', 'this is due today', new Date());
@@ -53,5 +65,4 @@ project2.sortByDueDate();
 project2.listTodo();
 
 showProjectList(projects);
-showTitle(project2);
-showProject(myProject);
+showHome(projects);

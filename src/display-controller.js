@@ -1,12 +1,8 @@
 // Module to control the DOM/Display
 import { format } from 'date-fns';
-export { showTitle, showProjectList, showProject }
+export { showTitle, showProjectList, showProject, showHome }
 
-function showTitle(project) {
-    const title = document.querySelector('.main-title');
-    title.textContent = project.title;
-}
-
+// Show Project lists on the sidebar
 function showProjectList(projects) {
     const projectList = document.querySelector('.project-list');
     for (const project of projects) {
@@ -16,9 +12,30 @@ function showProjectList(projects) {
     }
 }
 
-// Show all Todos of a project in main-container
+// Show the name of a project in main title space
+function showTitle(project) {
+    const title = document.querySelector('.main-title');
+    title.textContent = project.title;
+}
+
+// Show home page with all todos in all projects listed
+function showHome(projects) {
+    const title = document.querySelector('.main-title');
+    title.textContent = 'My Projects';
+    const container = document.querySelector('.main-body');
+
+    for (const project of projects) {
+        const projectTitle = document.createElement('div');
+        projectTitle.classList.add('subtitle');
+        projectTitle.textContent = `# ${project.title}`;
+        container.appendChild(projectTitle);
+        showProject(project);
+    }
+}
+
+// Show all Todos of a single project in main-container
 function showProject(project) {
-    const container = document.querySelector('.main-container');
+    const container = document.querySelector('.main-body');
     for (const todo of project.todoArray) {
         const todoTab = document.createElement('div');
         todoTab.classList.add('todo-tab');
