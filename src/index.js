@@ -54,4 +54,4 @@ project2.listTodo();
 
 showProjectList(projects);
 showTitle(project2);
-showProject(project2);
+showProject(myProject);

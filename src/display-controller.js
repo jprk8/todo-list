@@ -20,15 +20,11 @@ function showProjectList(projects) {
 function showProject(project) {
     const container = document.querySelector('.main-container');
     for (const todo of project.todoArray) {
-        const todoCard = document.createElement('div');
-        todoCard.classList.add('todo-card');
-
         const todoTab = document.createElement('div');
         todoTab.classList.add('todo-tab');
         const completeBtn = document.createElement('button');
         completeBtn.classList.add('complete');
         todoTab.appendChild(completeBtn);
-        todoCard.appendChild(todoTab);
 
         const todoTitle = document.createElement('div');
         todoTitle.classList.add('todo-title');
@@ -38,14 +34,29 @@ function showProject(project) {
         todoNotes.textContent = todo.notes;
         const todoDate = document.createElement('div');
         todoDate.classList.add('todo-date');
-        const shortDate = format(todo.dueDate, 'MMM d, y');
-        todoDate.textContent = `Due Date: ${shortDate}`;
 
+        // handle items with no due date
+        if (todo.dueDate) {
+            const shortDate = format(todo.dueDate, 'MMM d, y');
+            todoDate.textContent = `Due Date: ${shortDate}`;
+        } else {
+            todoDate.textContent = 'No Due Date';
+        }
+
+        const todoCard = document.createElement('div');
         const todoMain = document.createElement('div');
-        todoMain.classList.add('todo-main');
+        // handle urgent cards
+        if (todo.priority === 0) {
+            todoCard.classList.add('todo-card-urgent');
+            todoMain.classList.add('todo-main-urgent');
+        } else {
+            todoCard.classList.add('todo-card');
+            todoMain.classList.add('todo-main');
+        }
         todoMain.appendChild(todoTitle);
         todoMain.appendChild(todoNotes);
         todoMain.appendChild(todoDate);
+        todoCard.appendChild(todoTab);
         todoCard.appendChild(todoMain);
         container.appendChild(todoCard);
     }

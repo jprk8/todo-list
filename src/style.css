@@ -109,7 +109,8 @@ ul {
     gap: 20px;
 }
 
-.todo-card {
+.todo-card,
+.todo-card-urgent {
     width: 550px;
     background-color: #eee;
     border: 1px solid #bbb;
@@ -117,7 +118,12 @@ ul {
     border-radius: 6px;
     box-shadow: 1px 1px 3px darkgrey;
     display: flex;
-    gap: 10px;
+}
+
+.todo-card-urgent {
+    outline: 1px solid orangered;
+    border: 1px solid orangered;
+    border-left: 6px solid orangered;
 }
 
 .todo-tab {
@@ -125,17 +131,28 @@ ul {
     background-color: #ddd;
 }
 
-.todo-main {
-    padding: 10px 5px;
+.todo-main,
+.todo-main-urgent {
+    width: 100%;
+    padding: 10px;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    color: #555;
+}
+
+.todo-main-urgent {
+    background-color: rgb(255, 255, 194);
+    color: blue;
 }
 
 .todo-title {
     font-size: 20px;
+    color: black;
+    font-weight: 600;
 }
 
-.todo-notes,
-.todo-dueDate {
-    color: #555;
+.todo-main-urgent .todo-title {
+    color: blue;
 }
 
 .todo-date {
