@@ -75,6 +75,7 @@ ul {
 .profile-name {
     font-size: 20px;
     font-weight: 700;
+    color: #222;
 }
 
 .sidebar-menu {
@@ -186,7 +187,7 @@ button.complete {
 }
 
 dialog {
-    margin: 80px 360px;
+    margin: 80px 340px;
     border-radius: 12px;
     background-color: #eee;
     border: none;

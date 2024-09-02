@@ -1,6 +1,6 @@
 // Module to control the DOM/Display
 import { format } from 'date-fns';
-export { showTitle, showProjectList, showProject, showHome }
+export { showTitle, showProjectList, showProject, showHome, refreshMain }
 
 // Show Project lists on the sidebar
 function showProjectList(projects) {
@@ -77,4 +77,19 @@ function showProject(project) {
         todoCard.appendChild(todoMain);
         container.appendChild(todoCard);
     }
+}
+
+// Refresh screen
+function refreshMain() {
+    const main = document.querySelector('.main-container');
+    const title = document.querySelector('.main-title');
+    const body = document.querySelector('.main-body');
+    main.removeChild(title);
+    main.removeChild(body);
+    const newTitle = document.createElement('div');
+    const newBody = document.createElement('div');
+    newTitle.classList.add('main-title');
+    newBody.classList.add('main-body');
+    main.appendChild(newTitle);
+    main.appendChild(newBody);
 }
