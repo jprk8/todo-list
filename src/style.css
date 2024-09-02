@@ -26,6 +26,10 @@ input, button, textarea, select {
     padding: 0;
 }
 
+button {
+    cursor: pointer;
+}
+
 p, h1, h2, h3, h4, h5, h6 {
     overflow-wrap: break-word;
 }
@@ -80,6 +84,17 @@ ul {
 
 .add-todo {
     margin-bottom: 30px;
+    padding: 4px 0;
+    background-color: orangered;
+    color: #eee;
+    border: none;
+    font-weight: 800;
+    border-radius: 4px;
+}
+
+.add-todo:hover {
+    background-color: #eee;
+    color: orangered;
 }
 
 .project-title {
@@ -168,7 +183,6 @@ button.complete {
     height: 22px;
     border-radius: 50%;
     border: 1px solid #888;
-    cursor: pointer;
 }
 
 dialog {
@@ -177,9 +191,63 @@ dialog {
     background-color: #eee;
     border: none;
     outline: none;
+    padding: 20px;
+}
+
+.new-todo-dialog form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.btn-container {
+    align-self: end;
+}
+
+.add-btn,
+.close-btn {
+    width: 100px;
+    padding: 4px 0;
+    margin-left: 10px;
+    font-weight: 600;
+    border: 1px solid #999;
+    margin-top: 20px;
+}
+
+.add-btn {
+    background-color: orangered;
+    color: #eee;
+    font-weight: 800;
+    border: 1px solid orangered;
+}
+
+.form-row,
+.select-row {
+    display: flex;
+    flex-direction: column;
+}
+
+input[type='text'],
+input[type='date'],
+#select-project {
+    width: 400px;
+    padding: 2px 4px;
+}
+
+.form-row label,
+.select-row div {
+    font-weight: 600;
+    color: #555;
+    letter-spacing: 1px;
 }
 
 ::backdrop {
     background-color: black;
     opacity: 0.5;
+}
+
+.dialog-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
 }
