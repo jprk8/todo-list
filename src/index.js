@@ -13,7 +13,6 @@ const myProjects = document.querySelector('.project-home');
 myProjects.addEventListener('click', () => {
     refreshMain();
     showHome(PROJECTS);
-    makeDelBtn();
 });
 
 // function for new task dialog
@@ -89,11 +88,10 @@ addBtn.addEventListener('click', (e) => {
         // **Need to implement way to refresh to current page after adding
         refreshMain();
         showHome(PROJECTS);
-        makeDelBtn();
     }
 });
 
-// testing testing testing testing testing testing testing testing testing testing testing 
+// SAMPLE TODO SAMPLE TODO SAMPLE TODO SAMPLE TODO SAMPLE TODO SAMPLE TODO SAMPLE TODO SAMPLE TODO
 const test = new Todo('test', 'this is due today', new Date());
 const test3 = new Todo('todo3', 'this one is urgent', new Date(), 0);
 const test4 = new Todo('anotherone' , 'normal todo but no dueDate');
@@ -115,24 +113,25 @@ project2.addTodo(newyear);
 PROJECTS.push(myProject);
 PROJECTS.push(project2);
 
+// SAMPLE TODO SAMPLE TODO SAMPLE TODO SAMPLE TODO SAMPLE TODO SAMPLE TODO SAMPLE TODO SAMPLE TODO
+
 showProjectList(PROJECTS);
 showHome(PROJECTS);
-makeDelBtn();
+
 
 // delete (complete) function for todos
 // make it into a function and call it every time display is refreshed...
+/*
 function makeDelBtn() {
     const delBtn = document.querySelectorAll('.complete');
     delBtn.forEach((btn) => {
         btn.addEventListener('click', () => {
-            console.log('wtf');
-            const projectIndex = btn.getAttribute('project-index');
-            delTodoCard(projectIndex);
             for (const project of PROJECTS) {
                 if (project.title === btn.getAttribute('project-title')) {
-                    project.delTodo(btn.index);
+                    project.delTodo(btn.getAttribute('index'));
                 }
             }
         });
     });
 }
+    */

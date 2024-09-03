@@ -29,7 +29,70 @@ function showHome(projects) {
         projectTitle.classList.add('subtitle');
         projectTitle.textContent = `# ${project.title}`;
         container.appendChild(projectTitle);
-        showProject(project);
+
+        //showProject(project);
+        let index = 0;
+        for (const todo of project.todoArray) {
+            if (todo) {
+                const todoTab = document.createElement('div');
+                todoTab.classList.add('todo-tab');
+                
+                // completeBtn will delete the item
+                const completeBtn = document.createElement('button');
+                completeBtn.classList.add('complete');
+                // make data attritubtes to connect the buttons to DOM and project array
+                completeBtn.setAttribute('index', index);
+                completeBtn.setAttribute('project-index', `${project.title}${index}`);
+                completeBtn.setAttribute('project-title', project.title);
+        
+                completeBtn.addEventListener('click', () => {
+                    project.delTodo(completeBtn.getAttribute('index'));
+                    const projectIndex = completeBtn.getAttribute('project-index');
+                    //delTodoCard(projectIndex);
+                    refreshMain();
+                    showHome(projects);
+                });
+                
+                todoTab.appendChild(completeBtn);
+        
+                const todoTitle = document.createElement('div');
+                todoTitle.classList.add('todo-title');
+                todoTitle.textContent = todo.title;
+                const todoNotes = document.createElement('div');
+                todoNotes.classList.add('todo-notes');
+                todoNotes.textContent = todo.notes;
+                const todoDate = document.createElement('div');
+                todoDate.classList.add('todo-date');
+        
+                // display items with no due date
+                if (todo.dueDate) {
+                    const shortDate = format(todo.dueDate, 'MMM d, y');
+                    todoDate.textContent = `Due Date: ${shortDate}`;
+                } else {
+                    todoDate.textContent = 'No Due Date';
+                }
+        
+                const todoCard = document.createElement('div');
+                const todoMain = document.createElement('div');
+        
+                // display urgent cards
+                if (todo.priority === 0) {
+                    todoCard.classList.add('todo-card-urgent');
+                    todoMain.classList.add('todo-main-urgent');
+                } else {
+                    todoCard.classList.add('todo-card');
+                    todoMain.classList.add('todo-main');
+                }
+                todoMain.appendChild(todoTitle);
+                todoMain.appendChild(todoNotes);
+                todoMain.appendChild(todoDate);
+                todoCard.appendChild(todoTab);
+                todoCard.appendChild(todoMain);
+                container.appendChild(todoCard);
+
+                index++;
+            }
+        }
     }
 }
 
@@ -38,61 +101,64 @@ function showProject(project) {
     const container = document.querySelector('.main-body');
     let index = 0;
     for (const todo of project.todoArray) {
-        const todoTab = document.createElement('div');
-        todoTab.classList.add('todo-tab');
-        
-        // completeBtn will delete the item
-        const completeBtn = document.createElement('button');
-        completeBtn.classList.add('complete');
-        // make data attritubtes to connect the buttons to DOM and project array
-        completeBtn.setAttribute('index', index);
-        completeBtn.setAttribute('project-index', `${project.title}${index}`);
-        completeBtn.setAttribute('project-title', project.title);
-        /* Implement button functionality in index.js
-        completeBtn.addEventListener('click', () => {
-            project.delTodo(index);
-            const projectIndex = completeBtn.getAttribute('index');
-            delTodoCard(projectIndex);
-        });
-        */
-        todoTab.appendChild(completeBtn);
-
-        const todoTitle = document.createElement('div');
-        todoTitle.classList.add('todo-title');
-        todoTitle.textContent = todo.title;
-        const todoNotes = document.createElement('div');
-        todoNotes.classList.add('todo-notes');
-        todoNotes.textContent = todo.notes;
-        const todoDate = document.createElement('div');
-        todoDate.classList.add('todo-date');
-
-        // display items with no due date
-        if (todo.dueDate) {
-            const shortDate = format(todo.dueDate, 'MMM d, y');
-            todoDate.textContent = `Due Date: ${shortDate}`;
-        } else {
-            todoDate.textContent = 'No Due Date';
+        if (todo) {
+            const todoTab = document.createElement('div');
+            todoTab.classList.add('todo-tab');
+            
+            // completeBtn will delete the item
+            const completeBtn = document.createElement('button');
+            completeBtn.classList.add('complete');
+            // make data attritubtes to connect the buttons to DOM and project array
+            completeBtn.setAttribute('index', index);
+            completeBtn.setAttribute('project-index', `${project.title}${index}`);
+            completeBtn.setAttribute('project-title', project.title);
+    
+            completeBtn.addEventListener('click', () => {
+                project.delTodo(index);
+                const projectIndex = completeBtn.getAttribute('project-index');
+                delTodoCard(projectIndex);
+            });
+            
+    
+            todoTab.appendChild(completeBtn);
+    
+            const todoTitle = document.createElement('div');
+            todoTitle.classList.add('todo-title');
+            todoTitle.textContent = todo.title;
+            const todoNotes = document.createElement('div');
+            todoNotes.classList.add('todo-notes');
+            todoNotes.textContent = todo.notes;
+            const todoDate = document.createElement('div');
+            todoDate.classList.add('todo-date');
+    
+            // display items with no due date
+            if (todo.dueDate) {
+                const shortDate = format(todo.dueDate, 'MMM d, y');
+                todoDate.textContent = `Due Date: ${shortDate}`;
+            } else {
+                todoDate.textContent = 'No Due Date';
+            }
+    
+            const todoCard = document.createElement('div');
+            const todoMain = document.createElement('div');
+    
+            // display urgent cards
+            if (todo.priority === 0) {
+                todoCard.classList.add('todo-card-urgent');
+                todoMain.classList.add('todo-main-urgent');
+            } else {
+                todoCard.classList.add('todo-card');
+                todoMain.classList.add('todo-main');
+            }
+            todoMain.appendChild(todoTitle);
+            todoMain.appendChild(todoNotes);
+            todoMain.appendChild(todoDate);
+            todoCard.appendChild(todoTab);
+            todoCard.appendChild(todoMain);
+            container.appendChild(todoCard);
+    
+            index++;
         }
-
-        const todoCard = document.createElement('div');
-        const todoMain = document.createElement('div');
-
-        // display urgent cards
-        if (todo.priority === 0) {
-            todoCard.classList.add('todo-card-urgent');
-            todoMain.classList.add('todo-main-urgent');
-        } else {
-            todoCard.classList.add('todo-card');
-            todoMain.classList.add('todo-main');
-        }
-        todoMain.appendChild(todoTitle);
-        todoMain.appendChild(todoNotes);
-        todoMain.appendChild(todoDate);
-        todoCard.appendChild(todoTab);
-        todoCard.appendChild(todoMain);
-        container.appendChild(todoCard);
-
-        index++;
     }
 }
 

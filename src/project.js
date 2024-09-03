@@ -12,6 +12,7 @@ class Project {
 
     delTodo(index) {
         this.todoArray.splice(index, 1);
+        //this.todoArray[index] = null;
     }
 
     setTodoComplete(index) {
