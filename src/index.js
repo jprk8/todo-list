@@ -1,7 +1,7 @@
 import './style.css';
 import { Todo } from './todo-item.js';
 import { Project } from './project.js';
-import { showTitle, showProjectList, showProject, showHome, refreshMain } from './display-controller.js';
+import { showTitle, showProjectList, showProject, showHome, refreshMain, delTodoCard } from './display-controller.js';
 import { toDate } from 'date-fns';
 
 const PROJECTS = []; // store all projects here
@@ -13,14 +13,8 @@ const myProjects = document.querySelector('.project-home');
 myProjects.addEventListener('click', () => {
     refreshMain();
     showHome(PROJECTS);
-})
-
-function showProjects() {
-    for (const project of PROJECTS) {
-        console.log(project.title);
-        console.log(`todo items: ${project.todoArray.length}`)
-    }
-}
+    makeDelBtn();
+});
 
 // function for new task dialog
 const newTodoDialog = document.querySelector('.new-todo-dialog');
@@ -69,14 +63,20 @@ closeBtn.addEventListener('click', (e) => {
 const addBtn = document.querySelector('.add-btn');
 addBtn.addEventListener('click', (e) => {
     e.preventDefault();
+
     todoForm.reportValidity();
     if (todoForm.checkValidity()) {
         const title = document.getElementById('title');
         const notes = document.getElementById('notes');
-        const dueDate = document.getElementById('due-date');
-        const dueDateFormat = dueDate.valueAsDate.toISOString().replace('.000Z', '');
+        let dueDate = document.getElementById('due-date');
+        if (dueDate.valueAsDate) {
+            // resolve date discrepancy from the date picker
+            dueDate = dueDate.valueAsDate.toISOString().replace('.000Z', '');
+        } else {
+            dueDate = dueDate.valueAsDate;
+        }
         const selectProject = document.getElementById('select-project');
-        const newTodo = new Todo(title.value, notes.value, dueDateFormat);
+        const newTodo = new Todo(title.value, notes.value, dueDate);
         // which project to push to
         for (const project of PROJECTS) {
             if (project.title === selectProject.value) {
@@ -85,8 +85,11 @@ addBtn.addEventListener('click', (e) => {
         }
         todoForm.reset();
         newTodoDialog.close();
+
+        // **Need to implement way to refresh to current page after adding
         refreshMain();
         showHome(PROJECTS);
+        makeDelBtn();
     }
 });
 
@@ -111,16 +114,25 @@ project2.addTodo(newyear);
 
 PROJECTS.push(myProject);
 PROJECTS.push(project2);
-showProjects();
-
-//myProject.listTodo();
-//myProject.sortByPriority();
-//myProject.listTodo();
-//myProject.delTodo(2);
-//myProject.listTodo();
-
-project2.sortByDueDate();
-project2.listTodo();
 
 showProjectList(PROJECTS);
 showHome(PROJECTS);
+makeDelBtn();
+
+// delete (complete) function for todos
+// make it into a function and call it every time display is refreshed...
+function makeDelBtn() {
+    const delBtn = document.querySelectorAll('.complete');
+    delBtn.forEach((btn) => {
+        btn.addEventListener('click', () => {
+            console.log('wtf');
+            const projectIndex = btn.getAttribute('project-index');
+            delTodoCard(projectIndex);
+            for (const project of PROJECTS) {
+                if (project.title === btn.getAttribute('project-title')) {
+                    project.delTodo(btn.index);
+                }
+            }
+        });
+    });
+}

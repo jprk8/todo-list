@@ -1,6 +1,6 @@
 // Module to control the DOM/Display
 import { format } from 'date-fns';
-export { showTitle, showProjectList, showProject, showHome, refreshMain }
+export { showTitle, showProjectList, showProject, showHome, refreshMain, delTodoCard }
 
 // Show Project lists on the sidebar
 function showProjectList(projects) {
@@ -44,13 +44,17 @@ function showProject(project) {
         // completeBtn will delete the item
         const completeBtn = document.createElement('button');
         completeBtn.classList.add('complete');
-        // make the index unique by adding project title
-        completeBtn.setAttribute('index', `${project.title}${index}`);
+        // make data attritubtes to connect the buttons to DOM and project array
+        completeBtn.setAttribute('index', index);
+        completeBtn.setAttribute('project-index', `${project.title}${index}`);
+        completeBtn.setAttribute('project-title', project.title);
+        /* Implement button functionality in index.js
         completeBtn.addEventListener('click', () => {
             project.delTodo(index);
             const projectIndex = completeBtn.getAttribute('index');
             delTodoCard(projectIndex);
         });
+        */
         todoTab.appendChild(completeBtn);
 
         const todoTitle = document.createElement('div');
@@ -109,7 +113,7 @@ function refreshMain() {
 
 // Delete Todo card from current display
 function delTodoCard(projectIndex) {
-    const completeBtn = document.querySelector(`.complete[index='${projectIndex}']`);
+    const completeBtn = document.querySelector(`.complete[project-index='${projectIndex}']`);
     const todoCard = completeBtn.parentNode.parentNode;
     const body = document.querySelector('.main-body');
     body.removeChild(todoCard);
