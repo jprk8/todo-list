@@ -36,11 +36,21 @@ function showHome(projects) {
 // Show all Todos of a single project in main-container
 function showProject(project) {
     const container = document.querySelector('.main-body');
+    let index = 0;
     for (const todo of project.todoArray) {
         const todoTab = document.createElement('div');
         todoTab.classList.add('todo-tab');
+        
+        // completeBtn will delete the item
         const completeBtn = document.createElement('button');
         completeBtn.classList.add('complete');
+        // make the index unique by adding project title
+        completeBtn.setAttribute('index', `${project.title}${index}`);
+        completeBtn.addEventListener('click', () => {
+            project.delTodo(index);
+            const projectIndex = completeBtn.getAttribute('index');
+            delTodoCard(projectIndex);
+        });
         todoTab.appendChild(completeBtn);
 
         const todoTitle = document.createElement('div');
@@ -52,7 +62,7 @@ function showProject(project) {
         const todoDate = document.createElement('div');
         todoDate.classList.add('todo-date');
 
-        // handle items with no due date
+        // display items with no due date
         if (todo.dueDate) {
             const shortDate = format(todo.dueDate, 'MMM d, y');
             todoDate.textContent = `Due Date: ${shortDate}`;
@@ -62,7 +72,8 @@ function showProject(project) {
 
         const todoCard = document.createElement('div');
         const todoMain = document.createElement('div');
-        // handle urgent cards
+
+        // display urgent cards
         if (todo.priority === 0) {
             todoCard.classList.add('todo-card-urgent');
             todoMain.classList.add('todo-main-urgent');
@@ -76,6 +87,8 @@ function showProject(project) {
         todoCard.appendChild(todoTab);
         todoCard.appendChild(todoMain);
         container.appendChild(todoCard);
+
+        index++;
     }
 }
 
@@ -92,4 +105,12 @@ function refreshMain() {
     newBody.classList.add('main-body');
     main.appendChild(newTitle);
     main.appendChild(newBody);
+}
+
+// Delete Todo card from current display
+function delTodoCard(projectIndex) {
+    const completeBtn = document.querySelector(`.complete[index='${projectIndex}']`);
+    const todoCard = completeBtn.parentNode.parentNode;
+    const body = document.querySelector('.main-body');
+    body.removeChild(todoCard);
 }

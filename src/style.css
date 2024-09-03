@@ -89,6 +89,7 @@ ul {
     background-color: orangered;
     color: #eee;
     border: none;
+    font-size: 18px;
     font-weight: 800;
     border-radius: 4px;
 }
@@ -98,9 +99,19 @@ ul {
     color: orangered;
 }
 
-.project-title {
+.project-home {
     font-size: 20px;
     font-weight: 600;
+    border: 1px solid #bbb;
+    border-left: 4px solid orangered;
+    border-radius: 4px;
+    padding: 2px 7px;
+    background-color: #eee;
+    cursor: pointer;
+}
+
+.project-home:hover {
+    background-color: #ddd;
 }
 
 .project-list {
@@ -184,6 +195,13 @@ button.complete {
     height: 22px;
     border-radius: 50%;
     border: 1px solid #888;
+}
+
+button.complete:hover {
+    background-color: orangered;
+    content: 'a';
+    color: white;
+    font-size: 12px;
 }
 
 dialog {

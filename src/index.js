@@ -8,6 +8,13 @@ const PROJECTS = []; // store all projects here
 const defaultGroup = new Project('Default Group');
 PROJECTS.push(defaultGroup);
 
+// My Projects on the sidebar is home button
+const myProjects = document.querySelector('.project-home');
+myProjects.addEventListener('click', () => {
+    refreshMain();
+    showHome(PROJECTS);
+})
+
 function showProjects() {
     for (const project of PROJECTS) {
         console.log(project.title);
