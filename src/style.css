@@ -202,14 +202,12 @@ ul {
     background-color: #ddd;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    align-items: center;
+    gap: 8px;
 }
 
 .del-btn,
 .edit-btn {
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
     font-size: 12px;
     font-weight: 900;
     color: #eee;
@@ -218,10 +216,18 @@ ul {
 
 .del-btn {
     background-color: red;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
 }
 
 .edit-btn {
-    background-color: green;
+    background-color: #888;
+    padding: 0 6px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 800;
+    height: 24px;
 }
 
 button.complete {
@@ -233,7 +239,6 @@ button.complete {
 
 button.complete:hover {
     background-color: orangered;
-    content: 'a';
     color: white;
     font-size: 12px;
 }
