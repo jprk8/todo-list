@@ -39,8 +39,15 @@ function showHome(projects) {
                 // completeBtn will delete the item
                 const completeBtn = document.createElement('button');
                 completeBtn.classList.add('complete');
-                // make data attritubtes to connect the buttons to DOM and project array
-
+                if (todo.complete) completeBtn.style.cssText = 'background-color: green';
+                // make data attributes to connect the buttons to DOM and project array
+                completeBtn.setAttribute('index', index);
+                completeBtn.setAttribute('project-title', project.title);
+                completeBtn.addEventListener('click', () => {
+                    todo.toggleComplete();
+                    refreshMain();
+                    showHome(projects);
+                });
                 
                 todoTab.appendChild(completeBtn);
         
@@ -64,8 +71,11 @@ function showHome(projects) {
                 const todoCard = document.createElement('div');
                 const todoMain = document.createElement('div');
         
-                // display urgent cards
-                if (todo.priority === 0) {
+                // display urgent/complete cards
+                if (todo.complete === true) {
+                    todoCard.classList.add('todo-card');
+                    todoMain.classList.add('todo-main-complete');
+                } else if (todo.priority === 0) {
                     todoCard.classList.add('todo-card-urgent');
                     todoMain.classList.add('todo-main-urgent');
                 } else {
@@ -79,20 +89,26 @@ function showHome(projects) {
                 const todoMenu = document.createElement('div');
                 todoMenu.classList.add('todo-menu');
 
+                // make delete button
                 const delBtn = document.createElement('button');
                 delBtn.classList.add('del-btn');
                 delBtn.textContent = 'X';
-
                 delBtn.setAttribute('index', index);
                 delBtn.setAttribute('project-title', project.title);
-        
                 delBtn.addEventListener('click', () => {
                     project.delTodo(delBtn.getAttribute('index'));
                     refreshMain();
                     showHome(projects);
                 });
 
+                // make edit button
+                const editBtn = document.createElement('button');
+                editBtn.classList.add('edit-btn');
+                editBtn.textContent = 'E';
+                editBtn.setAttribute('index', index);
+
                 todoMenu.appendChild(delBtn);
+                todoMenu.appendChild(editBtn);
 
                 todoCard.appendChild(todoTab);
                 todoCard.appendChild(todoMain);
