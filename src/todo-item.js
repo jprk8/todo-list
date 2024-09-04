@@ -10,4 +10,8 @@ class Todo {
         this.priority = priority;
         this.complete = false;
     }
+
+    toggleComplete() {
+        (this.complete) ? this.complete = false : this.complete = true;
+    }
 }

@@ -30,7 +30,6 @@ function showHome(projects) {
         projectTitle.textContent = `# ${project.title}`;
         container.appendChild(projectTitle);
 
-        //showProject(project);
         let index = 0;
         for (const todo of project.todoArray) {
             if (todo) {
@@ -41,17 +40,7 @@ function showHome(projects) {
                 const completeBtn = document.createElement('button');
                 completeBtn.classList.add('complete');
                 // make data attritubtes to connect the buttons to DOM and project array
-                completeBtn.setAttribute('index', index);
-                completeBtn.setAttribute('project-index', `${project.title}${index}`);
-                completeBtn.setAttribute('project-title', project.title);
-        
-                completeBtn.addEventListener('click', () => {
-                    project.delTodo(completeBtn.getAttribute('index'));
-                    const projectIndex = completeBtn.getAttribute('project-index');
-                    //delTodoCard(projectIndex);
-                    refreshMain();
-                    showHome(projects);
-                });
+
                 
                 todoTab.appendChild(completeBtn);
         
@@ -86,8 +75,28 @@ function showHome(projects) {
                 todoMain.appendChild(todoTitle);
                 todoMain.appendChild(todoNotes);
                 todoMain.appendChild(todoDate);
+
+                const todoMenu = document.createElement('div');
+                todoMenu.classList.add('todo-menu');
+
+                const delBtn = document.createElement('button');
+                delBtn.classList.add('del-btn');
+                delBtn.textContent = 'X';
+
+                delBtn.setAttribute('index', index);
+                delBtn.setAttribute('project-title', project.title);
+        
+                delBtn.addEventListener('click', () => {
+                    project.delTodo(delBtn.getAttribute('index'));
+                    refreshMain();
+                    showHome(projects);
+                });
+
+                todoMenu.appendChild(delBtn);
+
                 todoCard.appendChild(todoTab);
                 todoCard.appendChild(todoMain);
+                todoCard.appendChild(todoMenu);
                 container.appendChild(todoCard);
 
                 index++;
@@ -97,6 +106,7 @@ function showHome(projects) {
 }
 
 // Show all Todos of a single project in main-container
+// delete this??
 function showProject(project) {
     const container = document.querySelector('.main-body');
     let index = 0;
