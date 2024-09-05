@@ -238,7 +238,7 @@ button.complete {
 }
 
 button.complete:hover {
-    background-color: orangered;
+    background-color: green;
     color: white;
     font-size: 12px;
 }
@@ -253,20 +253,24 @@ dialog {
 }
 
 .new-todo-dialog form,
-.new-project-dialog form {
+.new-project-dialog form,
+.edit-dialog form {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.btn-container {
+.btn-container,
+.edit-btn-container {
     align-self: end;
 }
 
 .add-btn,
 .close-btn,
 .project-create-btn,
-.project-close-btn {
+.project-close-btn,
+.update-btn,
+.edit-close-btn {
     width: 100px;
     padding: 4px 0;
     margin-left: 10px;
@@ -276,7 +280,8 @@ dialog {
 }
 
 .add-btn,
-.project-create-btn {
+.project-create-btn,
+.update-btn {
     background-color: orangered;
     color: #eee;
     font-weight: 800;

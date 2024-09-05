@@ -1,7 +1,7 @@
 import './style.css';
 import { Todo } from './todo-item.js';
 import { Project } from './project.js';
-import { showTitle, showProjectList, showHome, refreshMain, refreshProjectList } from './display-controller.js';
+import { showTitle, showProjectList, showHome, refreshMain, refreshProjectList, appendProjectList } from './display-controller.js';
 import { toDate } from 'date-fns';
 
 const PROJECTS = []; // store all projects here
@@ -22,6 +22,8 @@ const todoForm = document.getElementById('add-todo-form');
 
 // function to dynamically add project list to the select box
 // to add new todos to existing projects
+/* REDEFINED IN DISPLAY-CONTROLLER.JS
+
 function appendProjectList() {
     const selectRow = document.createElement('div');
     selectRow.classList.add('select-row');
@@ -47,9 +49,11 @@ function appendProjectList() {
     const btnContainer = document.querySelector('.btn-container');
     todoForm.insertBefore(selectRow, btnContainer);
 }
+    */
+
 
 newTodoBtn.addEventListener('click', () => {
-    appendProjectList();
+    appendProjectList(PROJECTS, 'add');
     newTodoDialog.showModal();
 });
 

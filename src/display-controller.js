@@ -1,6 +1,6 @@
 // Module to control the DOM/Display
-import { format } from 'date-fns';
-export { showTitle, showProjectList, showHome, refreshMain, refreshProjectList }
+import { format, toDate } from 'date-fns';
+export { showTitle, showProjectList, showHome, refreshMain, refreshProjectList, appendProjectList }
 
 // Show Project lists on the sidebar
 function showProjectList(projects) {
@@ -111,11 +111,15 @@ function showHome(projects) {
                     showHome(projects);
                 });
 
-                // make edit button
+                // make edit button and its dialog function
                 const editBtn = document.createElement('button');
                 editBtn.classList.add('edit-btn');
                 editBtn.textContent = 'E';
+                editBtn.setAttribute('project', project.title);
                 editBtn.setAttribute('index', index);
+                editBtn.addEventListener('click', () => {
+                    showEditor(projects,  editBtn.getAttribute('project'), editBtn.getAttribute('index'));
+                });
 
                 todoMenu.appendChild(delBtn);
                 todoMenu.appendChild(editBtn);
@@ -131,6 +135,43 @@ function showHome(projects) {
     }
 }
 
+function showEditor(projects, projectName, index) {
+    const editDialog = document.querySelector('.edit-dialog');
+    appendProjectList(projects, 'edit');
+
+    // Display current todo values in the form
+    for (const project of projects) {
+        if (project.title === projectName) {
+            const title = document.getElementById('edit-title');
+            const notes = document.getElementById('edit-notes');
+            const dueDate = document.getElementById('edit-due-date');
+            title.setAttribute('value', project.todoArray[index].title);
+            notes.setAttribute('value', project.todoArray[index].notes);
+            const dueDateFormat = project.todoArray[index].dueDate;
+            if (dueDateFormat) {
+                dueDate.value = dueDateFormat.toISOString().split('T')[0].slice(0, 10);
+            } else {
+                dueDate.value = dueDateFormat;
+            }
+        }
+    }
+
+    // Editor dialog button function
+    const editClose = document.querySelector('.edit-close-btn');
+    editClose.addEventListener('click', (e) => {
+        e.preventDefault();
+        editDialog.close();
+    });
+
+    const updateBtn = document.querySelector('.update-btn');
+    updateBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+
+    });
+
+    editDialog.showModal();
+}
+
 // Refresh screen
 function refreshMain() {
     const main = document.querySelector('.main-container');
@@ -144,4 +185,41 @@ function refreshMain() {
     newBody.classList.add('main-body');
     main.appendChild(newTitle);
     main.appendChild(newBody);
+}
+
+function appendProjectList(projects, formName) {
+    const selectBox = document.createElement('select');
+    selectBox.setAttribute('id', 'select-project');
+    selectBox.setAttribute('name', 'select-project');
+
+    for (const project of projects) {
+        const option = document.createElement('option');
+        option.textContent = project.title;
+        selectBox.appendChild(option);
+    }
+
+    const addForm = document.getElementById('add-todo-form');
+    const editForm = document.getElementById('edit-form');
+    const selectRow = document.createElement('div');
+    const selectProject = document.createElement('div');
+    if (formName == 'add') {
+        const oldSelectRow = document.querySelector('.select-row');
+        addForm.removeChild(oldSelectRow);
+        selectRow.classList.add('select-row');
+        selectProject.textContent = 'Add to:';
+        selectRow.appendChild(selectProject);
+        selectRow.appendChild(selectBox);
+        const btnContainer = document.querySelector('.btn-container');
+        addForm.insertBefore(selectRow, btnContainer);
+    } else {
+        const oldSelectRow = document.querySelector('.edit-select-row');
+        editForm.removeChild(oldSelectRow);
+        selectRow.classList.add('edit-select-row');
+        selectProject.textContent = 'Change to:';
+        selectRow.appendChild(selectProject);
+        selectRow.appendChild(selectBox);
+        const btnContainer = document.querySelector('.edit-btn-container');
+        editForm.insertBefore(selectRow, btnContainer);
+    }
+
 }

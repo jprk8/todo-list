@@ -10,7 +10,7 @@
         <div class='sidebar'>
             <div class='profile'>
                 <img src='./img/hotwing-icon.png' alt='chicken icon' class='icon'>
-                <div class='profile-name'>Rooster Boy</div>
+                <div class='profile-name'>github/jprk8</div>
             </div>
             <div class='sidebar-menu'>
                 <button class='add-todo'>+ Add Task</button>
@@ -34,7 +34,7 @@
             </div>
             <div class='form-row'>
                 <label for='notes'>Notes</label>
-                <input type='text' id='notes' name='notes' value='Notes'/>
+                <input type='text' id='notes' name='notes' value='Notes' />
             </div>
             <div class='form-row'>
                 <label for='due-date'>Due Date</label>
@@ -58,6 +58,29 @@
             <div class='btn-container'>
                 <button type='submit' class='project-create-btn'>Create</button>
                 <button type='button' class='project-close-btn'>Cancel</button>
+            </div>
+        </form>
+    </dialog>
+    
+    <dialog class='edit-dialog'>
+        <div class='dialog-title'>Edit Task</div>
+        <form id='edit-form' method='dialog'>
+            <div class='form-row'>
+                <label for='edit-title'>Title*</label>
+                <input type='text' id='edit-title' name='edit-title' required />
+            </div>
+            <div class='form-row'>
+                <label for='edit-notes'>Notes</label>
+                <input type='text' id='edit-notes' name='edit-notes' />
+            </div>
+            <div class='form-row'>
+                <label for='edit-due-date'>Due Date</label>
+                <input type='date' id='edit-due-date' name='edit-due-date' />
+            </div>
+            <div class='edit-select-row'></div>
+            <div class='edit-btn-container'>
+                <button type='submit' class='update-btn'>Update</button>
+                <button type='button' class='edit-close-btn'>Cancel</button>
             </div>
         </form>
     </dialog>
