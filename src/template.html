@@ -13,7 +13,8 @@
                 <div class='profile-name'>Rooster Boy</div>
             </div>
             <div class='sidebar-menu'>
-                <button class='add-todo'>+ New Task</button>
+                <button class='add-todo'>+ Add Task</button>
+                <button class='new-project'>+ New Project</button>
                 <div class='project-home'>My Projects</div>
                 <ul class='project-list'></ul>
             </div>
@@ -43,6 +44,20 @@
             <div class='btn-container'>
                 <button type='submit' class='add-btn'>Add</button>
                 <button type='button' class='close-btn'>Cancel</button>
+            </div>
+        </form>
+    </dialog>
+
+    <dialog class='new-project-dialog'>
+        <div class='dialog-title'>New Project</div>
+        <form id='new-project-form' method='dialog'>
+            <div class='form-row'>
+                <label for='project-title'>Project Name *</label>
+                <input type='text' id='project-title' name='project-title' required />
+            </div>
+            <div class='btn-container'>
+                <button type='submit' class='project-create-btn'>Create</button>
+                <button type='button' class='project-close-btn'>Cancel</button>
             </div>
         </form>
     </dialog>

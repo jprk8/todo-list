@@ -83,19 +83,22 @@ ul {
     flex-direction: column;
 }
 
-.add-todo {
-    margin-bottom: 30px;
-    padding: 4px 0;
-    background-color: orangered;
-    color: #eee;
+.add-todo,
+.new-project {
+    padding: 4px 10px;
     border: none;
     font-size: 18px;
     font-weight: 800;
     border-radius: 4px;
+    text-align: left;
+    background-color: orangered;
+    color: #eee;
+    margin-bottom: 12px;
 }
 
-.add-todo:hover {
-    background-color: #eee;
+.add-todo:hover,
+.new-project:hover {
+    background-color: lightgoldenrodyellow;
     color: orangered;
 }
 
@@ -108,6 +111,7 @@ ul {
     padding: 2px 7px;
     background-color: #eee;
     cursor: pointer;
+    margin-top: 30px;
 }
 
 .project-home:hover {
@@ -212,22 +216,18 @@ ul {
     font-weight: 900;
     color: #eee;
     border: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
 }
 
 .del-btn {
     background-color: red;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
+
 }
 
 .edit-btn {
     background-color: #888;
-    padding: 0 6px;
-    border-radius: 4px;
-    font-size: 12px;
-    font-weight: 800;
-    height: 24px;
 }
 
 button.complete {
@@ -252,7 +252,8 @@ dialog {
     padding: 20px;
 }
 
-.new-todo-dialog form {
+.new-todo-dialog form,
+.new-project-dialog form {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -263,7 +264,9 @@ dialog {
 }
 
 .add-btn,
-.close-btn {
+.close-btn,
+.project-create-btn,
+.project-close-btn {
     width: 100px;
     padding: 4px 0;
     margin-left: 10px;
@@ -272,7 +275,8 @@ dialog {
     margin-top: 20px;
 }
 
-.add-btn {
+.add-btn,
+.project-create-btn {
     background-color: orangered;
     color: #eee;
     font-weight: 800;

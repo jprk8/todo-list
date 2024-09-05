@@ -1,7 +1,7 @@
 import './style.css';
 import { Todo } from './todo-item.js';
 import { Project } from './project.js';
-import { showTitle, showProjectList, showProject, showHome, refreshMain, delTodoCard } from './display-controller.js';
+import { showTitle, showProjectList, showHome, refreshMain, refreshProjectList } from './display-controller.js';
 import { toDate } from 'date-fns';
 
 const PROJECTS = []; // store all projects here
@@ -85,10 +85,42 @@ addBtn.addEventListener('click', (e) => {
         todoForm.reset();
         newTodoDialog.close();
 
-        // **Need to implement way to refresh to current page after adding
         refreshMain();
         showHome(PROJECTS);
     }
+});
+
+// New Project dialog function
+const projectDialog = document.querySelector('.new-project-dialog');
+const newProjectBtn = document.querySelector('.new-project');
+const projectForm = document.getElementById('new-project-form');
+
+newProjectBtn.addEventListener('click', () => {
+    projectDialog.showModal();
+});
+
+const cancelProjectBtn = document.querySelector('.project-close-btn');
+cancelProjectBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    projectDialog.close();
+})
+
+const createProjectBtn = document.querySelector('.project-create-btn');
+createProjectBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const newProjectName = document.getElementById('project-title');
+    for (const project of PROJECTS) {
+        if (project.title.toLowerCase() == newProjectName.value.toLowerCase()) {
+            alert(`"${newProjectName.value}" already exists.`);
+            return;
+        }
+    }
+    PROJECTS.push(new Project(newProjectName.value));
+    projectForm.reset();
+    projectDialog.close();
+    refreshProjectList(PROJECTS);
+    refreshMain();
+    showHome(PROJECTS);
 });
 
 // SAMPLE TODO SAMPLE TODO SAMPLE TODO SAMPLE TODO SAMPLE TODO SAMPLE TODO SAMPLE TODO SAMPLE TODO
@@ -117,21 +149,3 @@ PROJECTS.push(project2);
 
 showProjectList(PROJECTS);
 showHome(PROJECTS);
-
-
-// delete (complete) function for todos
-// make it into a function and call it every time display is refreshed...
-/*
-function makeDelBtn() {
-    const delBtn = document.querySelectorAll('.complete');
-    delBtn.forEach((btn) => {
-        btn.addEventListener('click', () => {
-            for (const project of PROJECTS) {
-                if (project.title === btn.getAttribute('project-title')) {
-                    project.delTodo(btn.getAttribute('index'));
-                }
-            }
-        });
-    });
-}
-    */
