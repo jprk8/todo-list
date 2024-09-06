@@ -252,6 +252,13 @@ dialog {
     padding: 20px;
 }
 
+.edit-dialog {
+    position: fixed;
+    margin: 80px 940px;
+    width: min-content;
+    margin: auto;
+}
+
 .new-todo-dialog form,
 .new-project-dialog form,
 .edit-dialog form {

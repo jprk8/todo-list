@@ -139,6 +139,16 @@ function showEditor(projects, projectName, index) {
     const editDialog = document.querySelector('.edit-dialog');
     appendProjectList(projects, 'edit');
 
+    // set the current project group to be selected in the drop-down menu
+    const options = document.querySelectorAll('#select-project > option');
+    for (const item of options) {
+        if (item.value === projectName) {
+            item.selected = true;
+        } else {
+            item.selected = false;
+        }
+    }
+
     // Display current todo values in the form
     for (const project of projects) {
         if (project.title === projectName) {
@@ -190,7 +200,7 @@ function refreshMain() {
 function appendProjectList(projects, formName) {
     const selectBox = document.createElement('select');
     selectBox.setAttribute('id', 'select-project');
-    selectBox.setAttribute('name', 'select-project');
+    //selectBox.setAttribute('name', 'select-project');
 
     for (const project of projects) {
         const option = document.createElement('option');
