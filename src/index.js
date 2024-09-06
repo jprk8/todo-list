@@ -3,6 +3,7 @@ import { Todo } from './todo-item.js';
 import { Project } from './project.js';
 import { showTitle, showProjectList, showHome, refreshMain, refreshProjectList, appendProjectList } from './display-controller.js';
 import { toDate } from 'date-fns';
+export { PROJECTS };
 
 const PROJECTS = []; // store all projects here
 const defaultGroup = new Project('Default Group');
@@ -74,9 +75,9 @@ addBtn.addEventListener('click', (e) => {
         let dueDate = document.getElementById('due-date');
         if (dueDate.valueAsDate) {
             // resolve date discrepancy from the date picker
-            dueDate = dueDate.valueAsDate.toISOString().replace('.000Z', '');
+            dueDate = new Date(dueDate.valueAsDate.toISOString().replace('.000Z', ''));
         } else {
-            dueDate = dueDate.valueAsDate;
+            dueDate = false;
         }
         const selectProject = document.getElementById('select-project');
         const newTodo = new Todo(title.value, notes.value, dueDate);

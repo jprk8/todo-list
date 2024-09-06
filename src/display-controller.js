@@ -1,5 +1,7 @@
 // Module to control the DOM/Display
 import { format, toDate } from 'date-fns';
+import { Todo } from './todo-item.js';
+import { PROJECTS } from './index.js';
 export { showTitle, showProjectList, showHome, refreshMain, refreshProjectList, appendProjectList }
 
 // Show Project lists on the sidebar
@@ -118,6 +120,8 @@ function showHome(projects) {
                 editBtn.setAttribute('project', project.title);
                 editBtn.setAttribute('index', index);
                 editBtn.addEventListener('click', () => {
+                    // this thing has problem...
+                    // i'm making so many event listeners for the edit dialog!!
                     showEditor(projects,  editBtn.getAttribute('project'), editBtn.getAttribute('index'));
                 });
 
@@ -135,12 +139,25 @@ function showHome(projects) {
     }
 }
 
-function showEditor(projects, projectName, index) {
-    const editDialog = document.querySelector('.edit-dialog');
-    appendProjectList(projects, 'edit');
+// Editor functions
+const editDialog = document.querySelector('.edit-dialog');
+const editTitle = document.getElementById('edit-title');
+const editNotes = document.getElementById('edit-notes');
+const editDueDate = document.getElementById('edit-due-date');
+let editProject;
+let editIndex;
+let currentProject;
 
+function showEditor(projects, projectName, index) {
+    appendProjectList(projects, 'edit');
+    const selectProject = document.getElementById('edit-select-project');
+    editProject = document.getElementById('edit-select-project');
+    editIndex = index;
+    currentProject = projectName;
+    editDialog.showModal();
+    console.log(selectProject.value);
     // set the current project group to be selected in the drop-down menu
-    const options = document.querySelectorAll('#select-project > option');
+    const options = document.querySelectorAll('#edit-select-project > option');
     for (const item of options) {
         if (item.value === projectName) {
             item.selected = true;
@@ -152,35 +169,65 @@ function showEditor(projects, projectName, index) {
     // Display current todo values in the form
     for (const project of projects) {
         if (project.title === projectName) {
-            const title = document.getElementById('edit-title');
-            const notes = document.getElementById('edit-notes');
-            const dueDate = document.getElementById('edit-due-date');
-            title.setAttribute('value', project.todoArray[index].title);
-            notes.setAttribute('value', project.todoArray[index].notes);
+            editTitle.value = project.todoArray[index].title;
+            editNotes.value = project.todoArray[index].notes;
             const dueDateFormat = project.todoArray[index].dueDate;
             if (dueDateFormat) {
-                dueDate.value = dueDateFormat.toISOString().split('T')[0].slice(0, 10);
-            } else {
-                dueDate.value = dueDateFormat;
+                editDueDate.value = dueDateFormat.toISOString().split('T')[0].slice(0, 10);
             }
         }
     }
-
-    // Editor dialog button function
-    const editClose = document.querySelector('.edit-close-btn');
-    editClose.addEventListener('click', (e) => {
-        e.preventDefault();
-        editDialog.close();
-    });
-
-    const updateBtn = document.querySelector('.update-btn');
-    updateBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-
-    });
-
-    editDialog.showModal();
 }
+
+// Editor dialog button function
+const editClose = document.querySelector('.edit-close-btn');
+editClose.addEventListener('click', (e) => {
+    console.log('closing dialog');
+    e.preventDefault();
+    editDialog.close();
+});
+
+const updateBtn = document.querySelector('.update-btn');
+updateBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    // resolve datepicker discrepancy
+    let editDueDateFormat = false;
+    if (editDueDate.valueAsDate) {
+        editDueDateFormat = new Date(editDueDate.valueAsDate.toISOString().replace('.000Z', ''));
+    }
+    if (editProject.value != currentProject) {
+        const newTodo = new Todo(editTitle.value, editNotes.value, editDueDateFormat);
+        for (const project of PROJECTS) {
+            if (project.title === currentProject) {
+                project.delTodo(editIndex);
+                console.log(`deleting index ${editIndex} from ${currentProject}`);
+            } else if (project.title === editProject.value) {
+                project.addTodo(newTodo);
+                console.log(`adding to ${editProject.value}`);
+            }
+        }
+    } else if (editProject.value === currentProject) {
+        for (const project of PROJECTS) {
+            if (project.title === currentProject) {
+                project.todoArray[editIndex].title = editTitle.value;
+                project.todoArray[editIndex].notes = editNotes.value;
+                if (editDueDateFormat) {
+                    project.todoArray[editIndex].dueDate = new Date(editDueDateFormat);
+                } else {
+                    project.todoArray[editIndex].dueDate = false;
+                }
+                console.log('updating existing todo');
+            }
+        }
+
+    }
+    editDialog.close();
+    const editForm = document.getElementById('edit-form');
+    editForm.reset();
+    refreshMain();
+    showHome(PROJECTS);
+});
+
 
 // Refresh screen
 function refreshMain() {
@@ -199,7 +246,7 @@ function refreshMain() {
 
 function appendProjectList(projects, formName) {
     const selectBox = document.createElement('select');
-    selectBox.setAttribute('id', 'select-project');
+
     //selectBox.setAttribute('name', 'select-project');
 
     for (const project of projects) {
@@ -213,6 +260,8 @@ function appendProjectList(projects, formName) {
     const selectRow = document.createElement('div');
     const selectProject = document.createElement('div');
     if (formName == 'add') {
+        selectBox.setAttribute('id', 'select-project');
+        selectBox.setAttribute('name', 'select-project');
         const oldSelectRow = document.querySelector('.select-row');
         addForm.removeChild(oldSelectRow);
         selectRow.classList.add('select-row');
@@ -221,7 +270,10 @@ function appendProjectList(projects, formName) {
         selectRow.appendChild(selectBox);
         const btnContainer = document.querySelector('.btn-container');
         addForm.insertBefore(selectRow, btnContainer);
-    } else {
+        
+    } else if (formName == 'edit') {
+        selectBox.setAttribute('id', 'edit-select-project');
+        selectBox.setAttribute('name', 'edit-select-project');
         const oldSelectRow = document.querySelector('.edit-select-row');
         editForm.removeChild(oldSelectRow);
         selectRow.classList.add('edit-select-row');
