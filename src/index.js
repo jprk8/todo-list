@@ -1,8 +1,7 @@
 import './style.css';
 import { Todo } from './todo-item.js';
 import { Project } from './project.js';
-import { showTitle, showProjectList, showHome, refreshMain, refreshProjectList, appendProjectList } from './display-controller.js';
-import { toDate } from 'date-fns';
+import { showProjectList, showHome, refreshMain, refreshProjectList, appendProjectList } from './display-controller.js';
 export { PROJECTS };
 
 const PROJECTS = []; // store all projects here
@@ -97,25 +96,15 @@ createProjectBtn.addEventListener('click', (e) => {
 });
 
 // SAMPLE TODO SAMPLE TODO SAMPLE TODO SAMPLE TODO SAMPLE TODO SAMPLE TODO SAMPLE TODO SAMPLE TODO
-const test = new Todo('test', 'this is due today', new Date());
-const test3 = new Todo('todo3', 'this one is urgent', new Date(), 0);
-const test4 = new Todo('anotherone' , 'normal todo but no dueDate');
-const last = new Todo('future', 'due date is christmas (months start from 0)', new Date(2024, 11, 25));
 
 const christmas = new Todo('Christmas', 'Merry Christmas', new Date(2024, 11, 25));
-const newyear = new Todo('New Year', 'Happy New Year', new Date(2024, 0, 1));
+const newyear = new Todo('New Year', 'Happy New Year', new Date(2025, 0, 1));
 
-const myProject = new Project('Test Project');
 const project2 = new Project('Holidays');
-myProject.addTodo(test);
-myProject.addTodo(test3);
-myProject.addTodo(test4);
-myProject.addTodo(last);
 
 project2.addTodo(christmas);
 project2.addTodo(newyear);
 
-PROJECTS.push(myProject);
 PROJECTS.push(project2);
 
 // SAMPLE TODO SAMPLE TODO SAMPLE TODO SAMPLE TODO SAMPLE TODO SAMPLE TODO SAMPLE TODO SAMPLE TODO

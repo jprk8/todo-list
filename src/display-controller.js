@@ -1,5 +1,5 @@
 // Module to control the DOM/Display
-import { format, toDate } from 'date-fns';
+import { format } from 'date-fns';
 import { Todo } from './todo-item.js';
 import { PROJECTS } from './index.js';
 export { showTitle, showProjectList, showHome, refreshMain, refreshProjectList, appendProjectList }
@@ -185,7 +185,6 @@ function showEditor(projects, projectName, index) {
 // Editor dialog button function
 const editClose = document.querySelector('.edit-close-btn');
 editClose.addEventListener('click', (e) => {
-    console.log('closing dialog');
     e.preventDefault();
     editDialog.close();
 });
