@@ -155,7 +155,6 @@ function showEditor(projects, projectName, index) {
     editIndex = index;
     currentProject = projectName;
     editDialog.showModal();
-    console.log(selectProject.value);
     // set the current project group to be selected in the drop-down menu
     const options = document.querySelectorAll('#edit-select-project > option');
     for (const item of options) {
@@ -177,6 +176,10 @@ function showEditor(projects, projectName, index) {
             }
         }
     }
+
+    // Display current project above the project selection box
+    const showCurrentProject = document.querySelector('.current-project');
+    showCurrentProject.textContent = projectName;
 }
 
 // Editor dialog button function

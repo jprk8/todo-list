@@ -21,38 +21,6 @@ const newTodoDialog = document.querySelector('.new-todo-dialog');
 const newTodoBtn = document.querySelector('.add-todo');
 const todoForm = document.getElementById('add-todo-form');
 
-// function to dynamically add project list to the select box
-// to add new todos to existing projects
-/* REDEFINED IN DISPLAY-CONTROLLER.JS
-
-function appendProjectList() {
-    const selectRow = document.createElement('div');
-    selectRow.classList.add('select-row');
-
-    const selectProject = document.createElement('div');
-    selectProject.textContent = 'Add to:'
-    selectRow.appendChild(selectProject);
-
-    const selectBox = document.createElement('select');
-    selectBox.setAttribute('id', 'select-project');
-    selectBox.setAttribute('name', 'select-project');
-
-    for (const project of PROJECTS) {
-        const option = document.createElement('option');
-        option.textContent = project.title;
-        selectBox.appendChild(option);
-    }
-
-    selectRow.appendChild(selectBox);
-    const oldSelectRow = document.querySelector('.select-row');
-    todoForm.removeChild(oldSelectRow);
-
-    const btnContainer = document.querySelector('.btn-container');
-    todoForm.insertBefore(selectRow, btnContainer);
-}
-    */
-
-
 newTodoBtn.addEventListener('click', () => {
     appendProjectList(PROJECTS, 'add');
     newTodoDialog.showModal();
