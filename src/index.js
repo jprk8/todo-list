@@ -97,6 +97,8 @@ createProjectBtn.addEventListener('click', (e) => {
 
 // SAMPLE TODO SAMPLE TODO SAMPLE TODO SAMPLE TODO SAMPLE TODO SAMPLE TODO SAMPLE TODO SAMPLE TODO
 
+// Here I will do the localStorage API to retrieve data and initialize
+
 const christmas = new Todo('Christmas', 'Merry Christmas', new Date(2024, 11, 25));
 const newyear = new Todo('New Year', 'Happy New Year', new Date(2025, 0, 1));
 

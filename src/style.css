@@ -303,7 +303,8 @@ dialog {
 
 input[type='text'],
 input[type='date'],
-#select-project {
+#select-project,
+#edit-select-project {
     width: 400px;
     padding: 2px 4px;
 }

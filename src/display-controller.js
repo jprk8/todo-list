@@ -48,7 +48,6 @@ function showHome(projects) {
                 const todoTab = document.createElement('div');
                 todoTab.classList.add('todo-tab');
                 
-                // completeBtn will delete the item
                 const completeBtn = document.createElement('button');
                 completeBtn.classList.add('complete');
                 if (todo.complete) completeBtn.style.cssText = 'background-color: green';
@@ -120,8 +119,6 @@ function showHome(projects) {
                 editBtn.setAttribute('project', project.title);
                 editBtn.setAttribute('index', index);
                 editBtn.addEventListener('click', () => {
-                    // this thing has problem...
-                    // i'm making so many event listeners for the edit dialog!!
                     showEditor(projects,  editBtn.getAttribute('project'), editBtn.getAttribute('index'));
                 });
 
@@ -150,7 +147,6 @@ let currentProject;
 
 function showEditor(projects, projectName, index) {
     appendProjectList(projects, 'edit');
-    const selectProject = document.getElementById('edit-select-project');
     editProject = document.getElementById('edit-select-project');
     editIndex = index;
     currentProject = projectName;
@@ -248,8 +244,6 @@ function refreshMain() {
 
 function appendProjectList(projects, formName) {
     const selectBox = document.createElement('select');
-
-    //selectBox.setAttribute('name', 'select-project');
 
     for (const project of projects) {
         const option = document.createElement('option');
