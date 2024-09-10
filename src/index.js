@@ -22,6 +22,7 @@ function loadProject() {
         for (const item of project.todoArray) {
             newProject.addTodo(item);
         }
+
         PROJECTS.push(newProject);
     }
 }
@@ -70,6 +71,7 @@ addBtn.addEventListener('click', (e) => {
         } else {
             dueDate = false;
         }
+
         const selectProject = document.getElementById('select-project');
         const newTodo = new Todo(title.value, notes.value, dueDate);
         // which project to push to
@@ -78,12 +80,12 @@ addBtn.addEventListener('click', (e) => {
                 project.addTodo(newTodo);
             }
         }
+
         todoForm.reset();
         newTodoDialog.close();
 
         // Save the PROJECT array to localStorage after adding new todo
         saveProjects();
-
         refreshMain();
         showHome(PROJECTS);
     }
@@ -114,6 +116,7 @@ createProjectBtn.addEventListener('click', (e) => {
             return;
         }
     }
+    
     PROJECTS.push(new Project(newProjectName.value));
     projectForm.reset();
     projectDialog.close();

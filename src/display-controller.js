@@ -93,6 +93,7 @@ function showHome(projects) {
                     todoCard.classList.add('todo-card');
                     todoMain.classList.add('todo-main');
                 }
+
                 todoMain.appendChild(todoTitle);
                 todoMain.appendChild(todoNotes);
                 todoMain.appendChild(todoDate);
@@ -197,6 +198,7 @@ updateBtn.addEventListener('click', (e) => {
     if (editDueDate.valueAsDate) {
         editDueDateFormat = new Date(editDueDate.valueAsDate.toISOString().replace('.000Z', ''));
     }
+
     if (editProject.value != currentProject) {
         const newTodo = new Todo(editTitle.value, editNotes.value, editDueDateFormat);
         for (const project of PROJECTS) {
@@ -284,5 +286,4 @@ function appendProjectList(projects, formName) {
         const btnContainer = document.querySelector('.edit-btn-container');
         editForm.insertBefore(selectRow, btnContainer);
     }
-
 }
