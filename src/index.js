@@ -2,11 +2,35 @@ import './style.css';
 import { Todo } from './todo-item.js';
 import { Project } from './project.js';
 import { showProjectList, showHome, refreshMain, refreshProjectList, appendProjectList } from './display-controller.js';
-export { PROJECTS };
+export { PROJECTS, saveProjects };
 
 const PROJECTS = []; // store all projects here
-const defaultGroup = new Project('Default Group');
-PROJECTS.push(defaultGroup);
+
+
+// Check for localStorage data and load them
+if (localStorage.length != 0) {
+    loadProject();
+} else {
+    const defaultGroup = new Project('Default Group');
+    PROJECTS.push(defaultGroup);
+}
+
+function loadProject() {
+    const projectData = JSON.parse(localStorage.getItem('saveProject'));
+    for (const project of projectData) {
+        const newProject = new Project(project['title']);
+        for (const item of project.todoArray) {
+            newProject.addTodo(item);
+        }
+        PROJECTS.push(newProject);
+    }
+}
+
+// Save PROJECTS to localStorage
+function saveProjects() {
+    const projectString = JSON.stringify(PROJECTS);
+    localStorage.setItem('saveProject', projectString);
+}
 
 // My Projects on the sidebar is home button
 const myProjects = document.querySelector('.project-home');
@@ -57,6 +81,9 @@ addBtn.addEventListener('click', (e) => {
         todoForm.reset();
         newTodoDialog.close();
 
+        // Save the PROJECT array to localStorage after adding new todo
+        saveProjects();
+
         refreshMain();
         showHome(PROJECTS);
     }
@@ -94,22 +121,6 @@ createProjectBtn.addEventListener('click', (e) => {
     refreshMain();
     showHome(PROJECTS);
 });
-
-// SAMPLE TODO SAMPLE TODO SAMPLE TODO SAMPLE TODO SAMPLE TODO SAMPLE TODO SAMPLE TODO SAMPLE TODO
-
-// Here I will do the localStorage API to retrieve data and initialize
-
-const christmas = new Todo('Christmas', 'Merry Christmas', new Date(2024, 11, 25));
-const newyear = new Todo('New Year', 'Happy New Year', new Date(2025, 0, 1));
-
-const project2 = new Project('Holidays');
-
-project2.addTodo(christmas);
-project2.addTodo(newyear);
-
-PROJECTS.push(project2);
-
-// SAMPLE TODO SAMPLE TODO SAMPLE TODO SAMPLE TODO SAMPLE TODO SAMPLE TODO SAMPLE TODO SAMPLE TODO
 
 showProjectList(PROJECTS);
 showHome(PROJECTS);

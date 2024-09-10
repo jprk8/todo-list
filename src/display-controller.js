@@ -1,7 +1,7 @@
 // Module to control the DOM/Display
 import { format } from 'date-fns';
 import { Todo } from './todo-item.js';
-import { PROJECTS } from './index.js';
+import { PROJECTS, saveProjects } from './index.js';
 export { showTitle, showProjectList, showHome, refreshMain, refreshProjectList, appendProjectList }
 
 // Show Project lists on the sidebar
@@ -43,8 +43,8 @@ function showHome(projects) {
         container.appendChild(projectTitle);
 
         let index = 0;
-        for (const todo of project.todoArray) {
-            if (todo) {
+        if (project.todoArray.length != 0) {
+            for (const todo of project.todoArray) {
                 const todoTab = document.createElement('div');
                 todoTab.classList.add('todo-tab');
                 
@@ -110,9 +110,10 @@ function showHome(projects) {
                     project.delTodo(delBtn.getAttribute('index'));
                     refreshMain();
                     showHome(projects);
+                    saveProjects();
                 });
 
-                // make edit button and its dialog function
+                // make edit button to show editor dialog
                 const editBtn = document.createElement('button');
                 editBtn.classList.add('edit-btn');
                 editBtn.textContent = 'E';
@@ -132,11 +133,15 @@ function showHome(projects) {
 
                 index++;
             }
+        } else {
+            const empty = document.createElement('div');
+            empty.textContent = '<Empty Project>';
+            container.appendChild(empty);
         }
     }
 }
 
-// Editor functions
+// Editor dialog function
 const editDialog = document.querySelector('.edit-dialog');
 const editTitle = document.getElementById('edit-title');
 const editNotes = document.getElementById('edit-notes');
@@ -178,7 +183,6 @@ function showEditor(projects, projectName, index) {
     showCurrentProject.textContent = projectName;
 }
 
-// Editor dialog button function
 const editClose = document.querySelector('.edit-close-btn');
 editClose.addEventListener('click', (e) => {
     e.preventDefault();
@@ -224,6 +228,7 @@ updateBtn.addEventListener('click', (e) => {
     editForm.reset();
     refreshMain();
     showHome(PROJECTS);
+    saveProjects();
 });
 
 
