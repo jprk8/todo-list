@@ -1,275 +1,290 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
 
-*, *::before, *::after {
-    box-sizing: border-box;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 * {
-    margin: 0;
+  margin: 0;
 }
 
 body {
-    line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
-    background-color: #eee;
-    color: #444;
-    font-family: Nunito;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  background-color: #eee;
+  color: #444;
+  font-family: Nunito;
 }
 
-img, picture, video, canvas, svg {
-    display: block;
-    max-width: 100%;
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
 }
 
-input, button, textarea, select {
-    font: inherit;
-    padding: 0;
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  padding: 0;
 }
 
 button {
-    cursor: pointer;
+  cursor: pointer;
 }
 
-p, h1, h2, h3, h4, h5, h6 {
-    overflow-wrap: break-word;
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
 }
 
 ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-#root, #__next {
-    isolation: isolate;
+#root,
+#__next {
+  isolation: isolate;
 }
 
 .flex-container {
-    display: flex;
-    height: 100vh;
+  display: flex;
+  height: 100vh;
 }
 
 .sidebar {
-    background-color: #ddd;
-    width: 320px;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    gap: 30px;
-    height: 100vh;
+  background-color: #ddd;
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 30px;
+  height: 100vh;
 }
 
 .profile {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    border: 3px solid orangered;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 3px solid orangered;
 }
 
 .profile-name {
-    font-size: 20px;
-    font-weight: 700;
-    color: #222;
+  font-size: 20px;
+  font-weight: 700;
+  color: #222;
 }
 
 .sidebar-menu {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .add-todo,
 .new-project {
-    padding: 4px 10px;
-    border: none;
-    font-size: 18px;
-    font-weight: 800;
-    border-radius: 4px;
-    text-align: left;
-    background-color: orangered;
-    color: #eee;
-    margin-bottom: 12px;
+  padding: 4px 10px;
+  border: none;
+  font-size: 18px;
+  font-weight: 800;
+  border-radius: 4px;
+  text-align: left;
+  background-color: orangered;
+  color: #eee;
+  margin-bottom: 12px;
 }
 
 .add-todo:hover,
 .new-project:hover {
-    background-color: lightgoldenrodyellow;
-    color: orangered;
+  background-color: lightgoldenrodyellow;
+  color: orangered;
 }
 
 .project-home {
-    font-size: 20px;
-    font-weight: 600;
-    border: 1px solid #bbb;
-    border-left: 4px solid orangered;
-    border-radius: 4px;
-    padding: 2px 7px;
-    background-color: #eee;
-    cursor: pointer;
-    margin-top: 30px;
+  font-size: 20px;
+  font-weight: 600;
+  border: 1px solid #bbb;
+  border-left: 4px solid orangered;
+  border-radius: 4px;
+  padding: 2px 7px;
+  background-color: #eee;
+  cursor: pointer;
+  margin-top: 30px;
 }
 
 .project-home:hover {
-    background-color: #ddd;
+  background-color: #ddd;
 }
 
 .project-list {
-    margin: 8px;
-    font-size: 18px;
+  margin: 8px;
+  font-size: 18px;
 }
 
 .main-container {
-    padding: 40px;
-    display: flex;
-    flex-direction: column;
-    flex: auto;
-    overflow: scroll;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  flex: auto;
+  overflow: scroll;
 }
 
 .main-title {
-    font-size: 26px;
-    font-weight: 800;
+  font-size: 26px;
+  font-weight: 800;
 }
 
 .subtitle {
-    font-size: 22px;
-    font-weight: 600;
-    color: orangered;
-    margin-top: 20px;
+  font-size: 22px;
+  font-weight: 600;
+  color: orangered;
+  margin-top: 20px;
 }
 
 .main-body {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .todo-card,
 .todo-card-urgent {
-    width: 550px;
-    background-color: #eee;
-    border: 1px solid #bbb;
-    border-left: 6px solid orangered;
-    border-radius: 6px;
-    box-shadow: 1px 1px 3px darkgrey;
-    display: flex;
+  width: 550px;
+  background-color: #eee;
+  border: 1px solid #bbb;
+  border-left: 6px solid orangered;
+  border-radius: 6px;
+  box-shadow: 1px 1px 3px darkgrey;
+  display: flex;
 }
 
 .todo-card-urgent {
-    outline: 1px solid orangered;
-    border: 1px solid orangered;
-    border-left: 6px solid orangered;
+  outline: 1px solid orangered;
+  border: 1px solid orangered;
+  border-left: 6px solid orangered;
 }
 
 .todo-tab {
-    padding: 10px;
-    background-color: #ddd;
+  padding: 10px;
+  background-color: #ddd;
 }
 
 .todo-title {
-    font-size: 20px;
-    font-weight: 600;
+  font-size: 20px;
+  font-weight: 600;
 }
 
 .todo-date {
-    font-weight: 700;
+  font-weight: 700;
 }
 
 .todo-main,
 .todo-main-urgent,
 .todo-main-complete {
-    width: 100%;
-    padding: 10px;
-    color: #444;
+  width: 100%;
+  padding: 10px;
+  color: #444;
 }
 
 .todo-main-urgent {
-    background-color: rgb(255, 223, 213);
+  background-color: rgb(255, 223, 213);
 }
 
 .todo-main-complete {
-    background-color: #ddd;
-    color: green;
-    text-decoration: line-through;
+  background-color: #ddd;
+  color: green;
+  text-decoration: line-through;
 }
 
 .todo-menu {
-    background-color: #eee;
-    border-top-right-radius: 6px;
-    border-bottom-right-radius: 6px;
-    padding: 8px;
-    background-color: #ddd;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
+  background-color: #eee;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  padding: 8px;
+  background-color: #ddd;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
 }
 
 .del-btn,
 .edit-btn {
-    font-size: 12px;
-    font-weight: 900;
-    color: #eee;
-    border: none;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
+  font-size: 12px;
+  font-weight: 900;
+  color: #eee;
+  border: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
 }
 
 .del-btn {
-    background-color: red;
-
+  background-color: red;
 }
 
 .edit-btn {
-    background-color: #888;
+  background-color: #888;
 }
 
 button.complete {
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    border: 1px solid #888;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1px solid #888;
 }
 
 button.complete:hover {
-    background-color: green;
-    color: white;
-    font-size: 12px;
+  background-color: green;
+  color: white;
+  font-size: 12px;
 }
 
 dialog {
-    margin: 80px 340px;
-    border-radius: 12px;
-    background-color: #eee;
-    border: none;
-    outline: none;
-    padding: 20px;
+  margin: 80px 340px;
+  border-radius: 12px;
+  background-color: #eee;
+  border: none;
+  outline: none;
+  padding: 20px;
 }
 
 .edit-dialog {
-    position: fixed;
-    margin: 80px 940px;
-    width: min-content;
-    margin: auto;
+  position: fixed;
+  margin: 80px 940px;
+  width: min-content;
+  margin: auto;
 }
 
 .new-todo-dialog form,
 .new-project-dialog form,
 .edit-dialog form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .btn-container,
 .edit-btn-container {
-    align-self: end;
+  align-self: end;
 }
 
 .add-btn,
@@ -278,58 +293,58 @@ dialog {
 .project-close-btn,
 .update-btn,
 .edit-close-btn {
-    width: 100px;
-    padding: 4px 0;
-    margin-left: 10px;
-    font-weight: 600;
-    border: 1px solid #999;
-    margin-top: 20px;
+  width: 100px;
+  padding: 4px 0;
+  margin-left: 10px;
+  font-weight: 600;
+  border: 1px solid #999;
+  margin-top: 20px;
 }
 
 .add-btn,
 .project-create-btn,
 .update-btn {
-    background-color: orangered;
-    color: #eee;
-    font-weight: 800;
-    border: 1px solid orangered;
+  background-color: orangered;
+  color: #eee;
+  font-weight: 800;
+  border: 1px solid orangered;
 }
 
 .form-row,
 .select-row {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
-input[type='text'],
-input[type='date'],
+input[type="text"],
+input[type="date"],
 #select-project,
 #edit-select-project {
-    width: 400px;
-    padding: 2px 4px;
+  width: 400px;
+  padding: 2px 4px;
 }
 
 .form-row label,
 .select-row div {
-    font-weight: 600;
-    color: #555;
-    letter-spacing: 1px;
+  font-weight: 600;
+  color: #555;
+  letter-spacing: 1px;
 }
 
 ::backdrop {
-    background-color: black;
-    opacity: 0.5;
+  background-color: black;
+  opacity: 0.5;
 }
 
 .dialog-title {
-    font-size: 20px;
-    font-weight: 700;
-    margin-bottom: 10px;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 10px;
 }
 
 .current-project {
-    font-weight: 700;
-    flex: none;
-    padding: 2px 4px;
-    border-radius: 4px;
+  font-weight: 700;
+  flex: none;
+  padding: 2px 4px;
+  border-radius: 4px;
 }
