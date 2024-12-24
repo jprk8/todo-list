@@ -25,7 +25,13 @@ function loadProject() {
   for (const project of projectData) {
     const newProject = new Project(project["title"]);
     for (const item of project.todoArray) {
-      newProject.addTodo(item);
+      const todoItem = new Todo(
+        item.title,
+        item.notes,
+        item.dueDate,
+        item.complete,
+      );
+      newProject.addTodo(todoItem);
     }
 
     PROJECTS.push(newProject);
